@@ -1,0 +1,1476 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>IASMentorEdge - Test Plans & Pricing</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Inter', sans-serif;
+            background: #f8f9fa;
+            min-height: 100vh;
+            line-height: 1.6;
+        }
+        
+        /* Header */
+        .header {
+            background: white;
+            padding: 12px 24px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        
+        .logo-section {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .logo {
+            width: 36px;
+            height: 36px;
+            background: #c8553d;
+            border-radius: 6px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: 700;
+            font-size: 14px;
+        }
+        
+        .logo-text {
+            font-size: 20px;
+            font-weight: 700;
+            color: #c8553d;
+        }
+        
+        .nav-tabs {
+            display: flex;
+            gap: 8px;
+            flex: 1;
+            margin-left: 40px;
+        }
+        
+        .nav-tab {
+            padding: 8px 16px;
+            border-radius: 6px;
+            background: transparent;
+            border: none;
+            font-weight: 500;
+            color: #6b7280;
+            cursor: pointer;
+            transition: all 0.2s;
+            font-size: 14px;
+        }
+        
+        .nav-tab:hover {
+            background: #f3f4f6;
+            color: #374151;
+        }
+        
+        .nav-tab.active {
+            background: #fef3c7;
+            color: #92400e;
+        }
+        
+        .header-actions {
+            display: flex;
+            gap: 12px;
+            align-items: center;
+        }
+        
+        .user-profile {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding: 6px 12px;
+            border-radius: 6px;
+            background: #f3f4f6;
+            cursor: pointer;
+        }
+        
+        .user-avatar {
+            width: 28px;
+            height: 28px;
+            background: #8b5cf6;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 12px;
+            font-weight: 600;
+        }
+        
+        /* Main Container */
+        .main-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 40px 20px;
+        }
+        
+        /* Hero Section */
+        .hero-section {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+        
+        .hero-title {
+            font-size: 48px;
+            font-weight: 700;
+            color: #1a1a1a;
+            margin-bottom: 16px;
+        }
+        
+        .hero-subtitle {
+            font-size: 20px;
+            color: #6b7280;
+            margin-bottom: 24px;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        
+        .hero-badge {
+            display: inline-block;
+            background: linear-gradient(135deg, #3b82f6 0%, #1d4ed8 100%);
+            color: white;
+            padding: 8px 20px;
+            border-radius: 24px;
+            font-weight: 600;
+            font-size: 14px;
+            margin-bottom: 32px;
+        }
+        
+        /* Pricing Toggle */
+        .pricing-toggle {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 16px;
+            margin-bottom: 48px;
+        }
+        
+        .toggle-label {
+            font-weight: 600;
+            color: #6b7280;
+        }
+        
+        .toggle-switch {
+            position: relative;
+            width: 60px;
+            height: 30px;
+            background: #e5e7eb;
+            border-radius: 15px;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+        
+        .toggle-switch.active {
+            background: #3b82f6;
+        }
+        
+        .toggle-slider {
+            position: absolute;
+            top: 3px;
+            left: 3px;
+            width: 24px;
+            height: 24px;
+            background: white;
+            border-radius: 50%;
+            transition: transform 0.3s;
+        }
+        
+        .toggle-switch.active .toggle-slider {
+            transform: translateX(30px);
+        }
+        
+        .savings-badge {
+            background: #22c55e;
+            color: white;
+            padding: 4px 12px;
+            border-radius: 12px;
+            font-size: 12px;
+            font-weight: 600;
+        }
+        
+        /* Category Toggle */
+        .category-toggle {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 32px;
+        }
+        
+        .toggle-container {
+            position: relative;
+            background: #f3f4f6;
+            border-radius: 12px;
+            padding: 6px;
+            display: flex;
+            gap: 4px;
+        }
+        
+        .toggle-option {
+            position: relative;
+            background: none;
+            border: none;
+            padding: 12px 32px;
+            border-radius: 8px;
+            font-weight: 600;
+            color: #6b7280;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            z-index: 2;
+        }
+        
+        .toggle-option.active {
+            color: white;
+        }
+        
+        .toggle-indicator {
+            position: absolute;
+            top: 6px;
+            left: 6px;
+            width: calc(50% - 2px);
+            height: calc(100% - 12px);
+            background: linear-gradient(135deg, #3b82f6 0%, #1d4ed8 100%);
+            border-radius: 8px;
+            transition: transform 0.3s ease;
+            z-index: 1;
+        }
+        
+        .toggle-indicator.test-halls {
+            transform: translateX(100%);
+        }
+        
+        /* Content Sections */
+        .content-section {
+            margin-bottom: 60px;
+        }
+        
+        .content-section.hidden {
+            display: none;
+        }
+        
+        /* Test Plans Grid */
+        .test-plans-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 24px;
+            margin-bottom: 40px;
+        }
+        
+        .plan-card {
+            background: white;
+            border-radius: 16px;
+            padding: 24px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border: 2px solid transparent;
+        }
+        
+        .plan-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
+            border-color: #3b82f6;
+        }
+        
+        .plan-subject-icon {
+            width: 48px;
+            height: 48px;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            margin-bottom: 16px;
+        }
+        
+        .plan-subject {
+            font-size: 20px;
+            font-weight: 700;
+            color: #1a1a1a;
+            margin-bottom: 8px;
+        }
+        
+        .plan-description {
+            color: #6b7280;
+            font-size: 14px;
+            margin-bottom: 16px;
+        }
+        
+        .plan-price {
+            font-size: 24px;
+            font-weight: 700;
+            color: #3b82f6;
+            margin-bottom: 8px;
+        }
+        
+        .plan-stats {
+            font-size: 12px;
+            color: #9ca3af;
+            font-weight: 500;
+        }
+        
+        /* Test Halls Grid */
+        .test-halls-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 24px;
+            margin-bottom: 40px;
+        }
+        
+        .hall-card {
+            background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
+            border-radius: 16px;
+            padding: 24px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border: 2px solid transparent;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .hall-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(135deg, rgba(99, 102, 241, 0.05) 0%, rgba(79, 70, 229, 0.1) 100%);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+        
+        .hall-card:hover::before {
+            opacity: 1;
+        }
+        
+        .hall-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 12px 32px rgba(99, 102, 241, 0.15);
+            border-color: #6366f1;
+        }
+        
+        .hall-icon {
+            width: 56px;
+            height: 56px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #6366f1 0%, #4f46e5 100%);
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 28px;
+            margin-bottom: 16px;
+            position: relative;
+            z-index: 2;
+        }
+        
+        .hall-name {
+            font-size: 20px;
+            font-weight: 700;
+            color: #1a1a1a;
+            margin-bottom: 8px;
+            position: relative;
+            z-index: 2;
+        }
+        
+        .hall-description {
+            color: #6b7280;
+            font-size: 14px;
+            margin-bottom: 16px;
+            position: relative;
+            z-index: 2;
+        }
+        
+        .hall-price {
+            font-size: 24px;
+            font-weight: 700;
+            color: #6366f1;
+            margin-bottom: 16px;
+            position: relative;
+            z-index: 2;
+        }
+        
+        .hall-features {
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+            position: relative;
+            z-index: 2;
+        }
+        
+        .hall-features span {
+            font-size: 12px;
+            color: #64748b;
+            font-weight: 500;
+        }
+        
+        /* Pricing Cards */
+        .pricing-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 32px;
+            margin-bottom: 60px;
+        }
+        
+        .pricing-card {
+            background: white;
+            border-radius: 20px;
+            padding: 32px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+            transition: all 0.3s ease;
+            position: relative;
+            border: 2px solid transparent;
+        }
+        
+        .pricing-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 8px 40px rgba(0, 0, 0, 0.12);
+        }
+        
+        .pricing-card.popular {
+            border-color: #3b82f6;
+            transform: scale(1.05);
+        }
+        
+        .popular-badge {
+            position: absolute;
+            top: -12px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: linear-gradient(135deg, #3b82f6 0%, #1d4ed8 100%);
+            color: white;
+            padding: 8px 24px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 600;
+        }
+        
+        .plan-icon {
+            width: 64px;
+            height: 64px;
+            border-radius: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 32px;
+            margin-bottom: 20px;
+        }
+        
+        .plan-name {
+            font-size: 24px;
+            font-weight: 700;
+            color: #1a1a1a;
+            margin-bottom: 8px;
+        }
+        
+        .plan-description {
+            color: #6b7280;
+            margin-bottom: 24px;
+            line-height: 1.5;
+        }
+        
+        .plan-price {
+            display: flex;
+            align-items: baseline;
+            gap: 8px;
+            margin-bottom: 8px;
+        }
+        
+        .price-currency {
+            font-size: 20px;
+            font-weight: 600;
+            color: #1a1a1a;
+        }
+        
+        .price-amount {
+            font-size: 48px;
+            font-weight: 700;
+            color: #1a1a1a;
+        }
+        
+        .price-period {
+            font-size: 16px;
+            color: #6b7280;
+        }
+        
+        .original-price {
+            color: #9ca3af;
+            text-decoration: line-through;
+            font-size: 18px;
+        }
+        
+        .price-note {
+            font-size: 12px;
+            color: #6b7280;
+            margin-bottom: 24px;
+        }
+        
+        .features-list {
+            list-style: none;
+            margin-bottom: 32px;
+        }
+        
+        .feature-item {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 8px 0;
+            font-size: 14px;
+            color: #374151;
+        }
+        
+        .feature-icon {
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            background: #dcfce7;
+            color: #16a34a;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 12px;
+            flex-shrink: 0;
+        }
+        
+        .feature-icon.disabled {
+            background: #f3f4f6;
+            color: #9ca3af;
+        }
+        
+        .buy-btn {
+            width: 100%;
+            padding: 16px 24px;
+            border-radius: 12px;
+            border: none;
+            font-weight: 600;
+            font-size: 16px;
+            cursor: pointer;
+            transition: all 0.2s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+        
+        .buy-btn.primary {
+            background: linear-gradient(135deg, #3b82f6 0%, #1d4ed8 100%);
+            color: white;
+        }
+        
+        .buy-btn.primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(59, 130, 246, 0.4);
+        }
+        
+        .buy-btn.secondary {
+            background: #f3f4f6;
+            color: #374151;
+        }
+        
+        .buy-btn.secondary:hover {
+            background: #e5e7eb;
+        }
+        
+        /* Payment Modal */
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 10000;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+        }
+        
+        .modal-overlay.active {
+            opacity: 1;
+            visibility: visible;
+        }
+        
+        .payment-modal {
+            background: white;
+            border-radius: 20px;
+            max-width: 500px;
+            width: 90%;
+            max-height: 80vh;
+            overflow-y: auto;
+            transform: scale(0.7);
+            transition: transform 0.3s ease;
+        }
+        
+        .modal-overlay.active .payment-modal {
+            transform: scale(1);
+        }
+        
+        .modal-header {
+            padding: 24px;
+            border-bottom: 1px solid #e5e7eb;
+            text-align: center;
+        }
+        
+        .modal-title {
+            font-size: 24px;
+            font-weight: 700;
+            color: #1a1a1a;
+            margin-bottom: 8px;
+        }
+        
+        .modal-subtitle {
+            color: #6b7280;
+        }
+        
+        .modal-content {
+            padding: 24px;
+            text-align: center;
+        }
+        
+        .plan-summary {
+            background: #f9fafb;
+            border-radius: 12px;
+            padding: 20px;
+            margin-bottom: 24px;
+        }
+        
+        .summary-title {
+            font-weight: 600;
+            color: #1a1a1a;
+            margin-bottom: 8px;
+        }
+        
+        .summary-price {
+            font-size: 32px;
+            font-weight: 700;
+            color: #3b82f6;
+            margin-bottom: 4px;
+        }
+        
+        .summary-period {
+            color: #6b7280;
+            font-size: 14px;
+        }
+        
+        .payment-methods {
+            margin-bottom: 24px;
+        }
+        
+        .payment-tabs {
+            display: flex;
+            background: #f3f4f6;
+            border-radius: 8px;
+            padding: 4px;
+            margin-bottom: 20px;
+        }
+        
+        .payment-tab {
+            flex: 1;
+            padding: 8px 16px;
+            background: none;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: all 0.2s;
+            font-weight: 500;
+        }
+        
+        .payment-tab.active {
+            background: white;
+            color: #3b82f6;
+        }
+        
+        .qr-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 16px;
+        }
+        
+        .qr-code {
+            width: 200px;
+            height: 200px;
+            background: #f3f4f6;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: 2px dashed #d1d5db;
+            font-size: 64px;
+            color: #9ca3af;
+        }
+        
+        .qr-instructions {
+            text-align: center;
+            color: #6b7280;
+            font-size: 14px;
+            line-height: 1.5;
+        }
+        
+        .payment-id {
+            background: #e0f2fe;
+            color: #0369a1;
+            padding: 8px 16px;
+            border-radius: 8px;
+            font-family: monospace;
+            font-weight: 600;
+            margin: 16px 0;
+        }
+        
+        .close-modal {
+            position: absolute;
+            top: 16px;
+            right: 16px;
+            width: 32px;
+            height: 32px;
+            border: none;
+            background: #f3f4f6;
+            border-radius: 8px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: background 0.2s;
+        }
+        
+        .close-modal:hover {
+            background: #e5e7eb;
+        }
+        
+        /* FAQ Section */
+        .faq-section {
+            background: white;
+            border-radius: 20px;
+            padding: 40px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+        }
+        
+        .faq-title {
+            text-align: center;
+            font-size: 32px;
+            font-weight: 700;
+            color: #1a1a1a;
+            margin-bottom: 40px;
+        }
+        
+        .faq-item {
+            border-bottom: 1px solid #e5e7eb;
+            padding: 24px 0;
+        }
+        
+        .faq-item:last-child {
+            border-bottom: none;
+        }
+        
+        .faq-question {
+            font-size: 18px;
+            font-weight: 600;
+            color: #1a1a1a;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .faq-answer {
+            color: #6b7280;
+            margin-top: 16px;
+            line-height: 1.6;
+            display: none;
+        }
+        
+        .faq-answer.active {
+            display: block;
+        }
+        
+        .faq-icon {
+            transition: transform 0.3s;
+        }
+        
+        .faq-item.active .faq-icon {
+            transform: rotate(180deg);
+        }
+        
+        /* Test Hall Section */
+        .test-hall-section {
+            background: linear-gradient(135deg, #8b5cf6 0%, #7c3aed 100%);
+            border-radius: 20px;
+            padding: 40px;
+            color: white;
+            text-align: center;
+            margin: 60px 0;
+        }
+        
+        .test-hall-title {
+            font-size: 36px;
+            font-weight: 700;
+            margin-bottom: 16px;
+        }
+        
+        .test-hall-subtitle {
+            font-size: 18px;
+            opacity: 0.9;
+            margin-bottom: 32px;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        
+        .test-hall-features {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 24px;
+            margin-bottom: 32px;
+        }
+        
+        .test-hall-feature {
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 12px;
+            padding: 20px;
+        }
+        
+        .feature-icon-large {
+            font-size: 32px;
+            margin-bottom: 12px;
+        }
+        
+        .feature-title {
+            font-size: 16px;
+            font-weight: 600;
+            margin-bottom: 8px;
+        }
+        
+        .feature-description {
+            font-size: 14px;
+            opacity: 0.9;
+            line-height: 1.4;
+        }
+        
+        .test-hall-btn {
+            background: white;
+            color: #8b5cf6;
+            padding: 16px 32px;
+            border-radius: 12px;
+            border: none;
+            font-weight: 600;
+            font-size: 16px;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        
+        .test-hall-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(255, 255, 255, 0.3);
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="logo-section">
+            <div class="logo">IM</div>
+            <div class="logo-text">IASMentorEdge</div>
+        </div>
+        
+        <nav class="nav-tabs">
+            <button class="nav-tab" onclick="window.location.href='main.html'">Dashboard</button>
+            <button class="nav-tab">Test Plan</button>
+            <button class="nav-tab">Test Hall</button>
+        </nav>
+        
+        <div class="header-actions">
+            <div class="user-profile">
+                <div class="user-avatar">AK</div>
+                <span style="font-size: 13px; font-weight: 500;">Arjun Kumar</span>
+            </div>
+        </div>
+    </header>
+    
+    <!-- Main Container -->
+    <div class="main-container">
+        <!-- Hero Section -->
+        <div class="hero-section">
+            <div class="hero-badge">🚀 New Test Plans Available</div>
+            <h1 class="hero-title">Choose Your Success Plan</h1>
+            <p class="hero-subtitle">Comprehensive test series and study materials designed to help you crack UPSC with confidence</p>
+        </div>
+        
+        <!-- Main Category Toggle -->
+        <div class="category-toggle">
+            <div class="toggle-container">
+                <button class="toggle-option active" data-category="test-plans">Test Plans</button>
+                <button class="toggle-option" data-category="test-halls">Test Halls</button>
+                <div class="toggle-indicator"></div>
+            </div>
+        </div>
+        
+        <!-- Pricing Toggle (for Test Plans only) -->
+        <div class="pricing-toggle" id="pricingToggleSection">
+            <span class="toggle-label">Monthly</span>
+            <div class="toggle-switch" id="pricingToggle">
+                <div class="toggle-slider"></div>
+            </div>
+            <span class="toggle-label">Yearly</span>
+            <span class="savings-badge">Save 30%</span>
+        </div>
+        
+        <!-- Test Plans Section -->
+        <div class="content-section" id="test-plans-section">
+            <div class="test-plans-grid">
+                <div class="plan-card" onclick="openTestPlanModal('History Mastery', 'Ancient, Medieval & Modern History', 1299)">
+                    <div class="plan-subject-icon" style="background: #dbeafe;">📚</div>
+                    <h3 class="plan-subject">History</h3>
+                    <p class="plan-description">Ancient, Medieval & Modern History</p>
+                    <div class="plan-price">₹<span id="history-price">1299</span>/month</div>
+                    <div class="plan-stats">2,500 Questions • 50 Tests</div>
+                </div>
+                
+                <div class="plan-card" onclick="openTestPlanModal('Geography Complete', 'Physical, Human & Economic Geography', 1199)">
+                    <div class="plan-subject-icon" style="background: #dcfce7;">🌍</div>
+                    <h3 class="plan-subject">Geography</h3>
+                    <p class="plan-description">Physical, Human & Economic Geography</p>
+                    <div class="plan-price">₹<span id="geography-price">1199</span>/month</div>
+                    <div class="plan-stats">2,000 Questions • 40 Tests</div>
+                </div>
+                
+                <div class="plan-card" onclick="openTestPlanModal('Polity Master', 'Constitution & Governance', 1399)">
+                    <div class="plan-subject-icon" style="background: #f3e8ff;">⚖️</div>
+                    <h3 class="plan-subject">Polity</h3>
+                    <p class="plan-description">Constitution & Governance</p>
+                    <div class="plan-price">₹<span id="polity-price">1399</span>/month</div>
+                    <div class="plan-stats">1,800 Questions • 35 Tests</div>
+                </div>
+                
+                <div class="plan-card" onclick="openTestPlanModal('Economics Pro', 'Macro & Micro Economics', 1499)">
+                    <div class="plan-subject-icon" style="background: #fed7aa;">💰</div>
+                    <h3 class="plan-subject">Economics</h3>
+                    <p class="plan-description">Macro & Micro Economics</p>
+                    <div class="plan-price">₹<span id="economics-price">1499</span>/month</div>
+                    <div class="plan-stats">1,500 Questions • 30 Tests</div>
+                </div>
+                
+                <div class="plan-card" onclick="openTestPlanModal('Science & Technology', 'Physics, Chemistry, Biology & Tech', 1099)">
+                    <div class="plan-subject-icon" style="background: #fce7f3;">🔬</div>
+                    <h3 class="plan-subject">Science & Tech</h3>
+                    <p class="plan-description">Physics, Chemistry, Biology & Tech</p>
+                    <div class="plan-price">₹<span id="science-price">1099</span>/month</div>
+                    <div class="plan-stats">2,200 Questions • 45 Tests</div>
+                </div>
+                
+                <div class="plan-card" onclick="openTestPlanModal('Environment & Ecology', 'Environmental Science & Conservation', 999)">
+                    <div class="plan-subject-icon" style="background: #ccfbf1;">🌿</div>
+                    <h3 class="plan-subject">Environment</h3>
+                    <p class="plan-description">Environmental Science & Conservation</p>
+                    <div class="plan-price">₹<span id="environment-price">999</span>/month</div>
+                    <div class="plan-stats">1,200 Questions • 25 Tests</div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Test Halls Section -->
+        <div class="content-section hidden" id="test-halls-section">
+            <div class="test-halls-grid">
+                <div class="hall-card" onclick="openTestHallModal('Test Hall Ganga', 'Premium virtual test experience with real-time monitoring', 699)">
+                    <div class="hall-icon">🏛️</div>
+                    <h3 class="hall-name">Test Hall Ganga</h3>
+                    <p class="hall-description">Premium virtual test experience with real-time monitoring</p>
+                    <div class="hall-price">₹699/month</div>
+                    <div class="hall-features">
+                        <span>• Timed Simulations</span>
+                        <span>• Live Proctoring</span>
+                        <span>• Instant Results</span>
+                    </div>
+                </div>
+                
+                <div class="hall-card" onclick="openTestHallModal('Test Hall Yamuna', 'Advanced analytics with AI-powered insights', 799)">
+                    <div class="hall-icon">🏆</div>
+                    <h3 class="hall-name">Test Hall Yamuna</h3>
+                    <p class="hall-description">Advanced analytics with AI-powered insights</p>
+                    <div class="hall-price">₹799/month</div>
+                    <div class="hall-features">
+                        <span>• AI Performance Analysis</span>
+                        <span>• Detailed Reports</span>
+                        <span>• Adaptive Testing</span>
+                    </div>
+                </div>
+                
+                <div class="hall-card" onclick="openTestHallModal('Test Hall Saraswati', 'Elite test environment with personalized coaching', 999)">
+                    <div class="hall-icon">👑</div>
+                    <h3 class="hall-name">Test Hall Saraswati</h3>
+                    <p class="hall-description">Elite test environment with personalized coaching</p>
+                    <div class="hall-price">₹999/month</div>
+                    <div class="hall-features">
+                        <span>• Personal Mentor</span>
+                        <span>• Custom Study Plans</span>
+                        <span>• Priority Support</span>
+                    </div>
+                </div>
+                
+                <div class="hall-card" onclick="openTestHallModal('Test Hall Kaveri', 'Regional language support with vernacular interface', 599)">
+                    <div class="hall-icon">🌏</div>
+                    <h3 class="hall-name">Test Hall Kaveri</h3>
+                    <p class="hall-description">Regional language support with vernacular interface</p>
+                    <div class="hall-price">₹599/month</div>
+                    <div class="hall-features">
+                        <span>• Multi-language Support</span>
+                        <span>• Regional Content</span>
+                        <span>• Cultural Context</span>
+                    </div>
+                </div>
+                
+                <div class="hall-card" onclick="openTestHallModal('Test Hall Narmada', 'Specialized for interview preparation', 1199)">
+                    <div class="hall-icon">🎯</div>
+                    <h3 class="hall-name">Test Hall Narmada</h3>
+                    <p class="hall-description">Specialized for interview preparation</p>
+                    <div class="hall-price">₹1199/month</div>
+                    <div class="hall-features">
+                        <span>• Mock Interviews</span>
+                        <span>• Personality Development</span>
+                        <span>• Expert Panel</span>
+                    </div>
+                </div>
+                
+                <div class="hall-card" onclick="openTestHallModal('Test Hall Godavari', 'Group study sessions and collaborative learning', 899)">
+                    <div class="hall-icon">👥</div>
+                    <h3 class="hall-name">Test Hall Godavari</h3>
+                    <p class="hall-description">Group study sessions and collaborative learning</p>
+                    <div class="hall-price">₹899/month</div>
+                    <div class="hall-features">
+                        <span>• Group Sessions</span>
+                        <span>• Peer Learning</span>
+                        <span>• Discussion Forums</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Test Hall Section -->
+        <div class="test-hall-section">
+            <h2 class="test-hall-title">🏛️ Virtual Test Hall Experience</h2>
+            <p class="test-hall-subtitle">Experience real exam conditions with our advanced test hall simulation</p>
+            <div class="test-hall-features">
+                <div class="test-hall-feature">
+                    <div class="feature-icon-large">⏱️</div>
+                    <div class="feature-title">Timed Simulations</div>
+                    <div class="feature-description">Exact UPSC timing and conditions</div>
+                </div>
+                <div class="test-hall-feature">
+                    <div class="feature-icon-large">📊</div>
+                    <div class="feature-title">Real-time Analytics</div>
+                    <div class="feature-description">Track performance as you progress</div>
+                </div>
+                <div class="test-hall-feature">
+                    <div class="feature-icon-large">🎯</div>
+                    <div class="feature-title">Adaptive Testing</div>
+                    <div class="feature-description">Questions adapt to your skill level</div>
+                </div>
+                <div class="test-hall-feature">
+                    <div class="feature-icon-large">👥</div>
+                    <div class="feature-title">Live Rankings</div>
+                    <div class="feature-description">Compete with thousands of aspirants</div>
+                </div>
+            </div>
+            <button class="test-hall-btn" onclick="openPaymentModal('Test Hall Access', 599)">
+                Access Test Hall - ₹599/month
+            </button>
+        </div>
+        
+        <!-- FAQ Section -->
+        <div class="faq-section">
+            <h2 class="faq-title">Frequently Asked Questions</h2>
+            <div class="faq-item">
+                <div class="faq-question" onclick="toggleFaq(0)">
+                    <span>What payment methods do you accept?</span>
+                    <span class="faq-icon">▼</span>
+                </div>
+                <div class="faq-answer">
+                    We accept UPI, Net Banking, Credit/Debit Cards, and Digital Wallets. You can also pay using QR codes for quick transactions.
+                </div>
+            </div>
+            <div class="faq-item">
+                <div class="faq-question" onclick="toggleFaq(1)">
+                    <span>Can I change my plan anytime?</span>
+                    <span class="faq-icon">▼</span>
+                </div>
+                <div class="faq-answer">
+                    Yes, you can upgrade or downgrade your plan anytime. Changes will be reflected from the next billing cycle.
+                </div>
+            </div>
+            <div class="faq-item">
+                <div class="faq-question" onclick="toggleFaq(2)">
+                    <span>Is there a free trial available?</span>
+                    <span class="faq-icon">▼</span>
+                </div>
+                <div class="faq-answer">
+                    We offer a 7-day free trial for all new users. No credit card required to start your trial.
+                </div>
+            </div>
+            <div class="faq-item">
+                <div class="faq-question" onclick="toggleFaq(3)">
+                    <span>What is your refund policy?</span>
+                    <span class="faq-icon">▼</span>
+                </div>
+                <div class="faq-answer">
+                    We offer a 30-day money-back guarantee. If you're not satisfied, we'll provide a full refund within 30 days of purchase.
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Payment Modal -->
+    <div class="modal-overlay" id="paymentModal">
+        <div class="payment-modal">
+            <button class="close-modal" onclick="closePaymentModal()">×</button>
+            <div class="modal-header">
+                <h2 class="modal-title">Complete Your Purchase</h2>
+                <p class="modal-subtitle">Secure payment powered by Razorpay</p>
+            </div>
+            <div class="modal-content">
+                <div class="plan-summary">
+                    <div class="summary-title" id="selectedPlan">Pro Plan</div>
+                    <div class="summary-price" id="selectedPrice">₹1999</div>
+                    <div class="summary-period">per month</div>
+                </div>
+                
+                <div class="payment-methods">
+                    <div class="payment-tabs">
+                        <button class="payment-tab active" onclick="switchPaymentMethod('qr')">QR Code</button>
+                        <button class="payment-tab" onclick="switchPaymentMethod('card')">Card/UPI</button>
+                    </div>
+                    
+                    <div id="qrPayment">
+                        <div class="qr-container">
+                            <div class="qr-code">📱</div>
+                            <div class="qr-instructions">
+                                <strong>Scan QR code to pay</strong><br>
+                                Use any UPI app (GPay, PhonePe, Paytm) to scan and pay
+                            </div>
+                            <div class="payment-id">Payment ID: #PAY123456</div>
+                        </div>
+                    </div>
+                    
+                    <div id="cardPayment" style="display: none;">
+                        <p style="color: #6b7280; margin: 20px 0;">Redirecting to secure payment gateway...</p>
+                        <button class="buy-btn primary" style="margin-top: 20px;">
+                            Proceed to Payment Gateway →
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Test Plan Details Modal -->
+    <div class="modal-overlay" id="testPlanModal">
+        <div class="payment-modal">
+            <button class="close-modal" onclick="closeModal('testPlanModal')">×</button>
+            <div class="modal-header">
+                <h2 class="modal-title" id="planModalTitle">History Mastery</h2>
+                <p class="modal-subtitle" id="planModalSubtitle">Complete test plan details</p>
+            </div>
+            <div class="modal-content">
+                <div class="plan-summary">
+                    <div class="summary-title" id="planSummaryTitle">History Mastery Plan</div>
+                    <div class="summary-price" id="planSummaryPrice">₹1299</div>
+                    <div class="summary-period">per month</div>
+                </div>
+                
+                <div class="plan-details-section">
+                    <h3 style="margin-bottom: 16px; color: #1a1a1a;">📚 What's Included</h3>
+                    <div class="features-list" style="margin-bottom: 24px;">
+                        <div class="feature-item">✓ 2,500+ Practice Questions</div>
+                        <div class="feature-item">✓ 50 Full-length Tests</div>
+                        <div class="feature-item">✓ Detailed Solutions & Explanations</div>
+                        <div class="feature-item">✓ Performance Analytics</div>
+                        <div class="feature-item">✓ Study Material & Notes</div>
+                        <div class="feature-item">✓ Progress Tracking</div>
+                        <div class="feature-item">✓ Mobile App Access</div>
+                        <div class="feature-item">✓ Expert Doubt Resolution</div>
+                    </div>
+                </div>
+                
+                <button class="buy-btn primary" style="width: 100%; margin-top: 20px;" onclick="showPlanPayment()">
+                    📱 Pay Now with QR Code
+                </button>
+                
+                <div id="planQRSection" style="display: none; margin-top: 24px; text-align: center;">
+                    <div class="qr-container">
+                        <div class="qr-code">📱</div>
+                        <div class="qr-instructions">
+                            <strong>Scan QR code to pay</strong><br>
+                            Use any UPI app to complete payment
+                        </div>
+                        <div class="payment-id">Payment ID: #PLAN-123456</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Test Hall Details Modal -->
+    <div class="modal-overlay" id="testHallModal">
+        <div class="payment-modal">
+            <button class="close-modal" onclick="closeModal('testHallModal')">×</button>
+            <div class="modal-header">
+                <h2 class="modal-title" id="hallModalTitle">Test Hall Ganga</h2>
+                <p class="modal-subtitle" id="hallModalSubtitle">Premium virtual test experience</p>
+            </div>
+            <div class="modal-content">
+                <div class="plan-summary">
+                    <div class="summary-title" id="hallSummaryTitle">Test Hall Ganga Access</div>
+                    <div class="summary-price" id="hallSummaryPrice">₹699</div>
+                    <div class="summary-period">per month</div>
+                </div>
+                
+                <div class="plan-details-section">
+                    <h3 style="margin-bottom: 16px; color: #1a1a1a;">🏛️ Hall Features</h3>
+                    <div class="features-list" style="margin-bottom: 24px;">
+                        <div class="feature-item">✓ Real UPSC Exam Environment</div>
+                        <div class="feature-item">✓ Timed Test Simulations</div>
+                        <div class="feature-item">✓ Live Proctoring & Monitoring</div>
+                        <div class="feature-item">✓ Instant Result Generation</div>
+                        <div class="feature-item">✓ All India Ranking System</div>
+                        <div class="feature-item">✓ Performance Analytics</div>
+                        <div class="feature-item">✓ Question Paper Review</div>
+                        <div class="feature-item">✓ 24/7 Technical Support</div>
+                    </div>
+                </div>
+                
+                <button class="buy-btn primary" style="width: 100%; margin-top: 20px;" onclick="showHallPayment()">
+                    🏛️ Access Test Hall - Pay Now
+                </button>
+                
+                <div id="hallQRSection" style="display: none; margin-top: 24px; text-align: center;">
+                    <div class="qr-container">
+                        <div class="qr-code">🏛️</div>
+                        <div class="qr-instructions">
+                            <strong>Scan QR code to access Test Hall</strong><br>
+                            Complete payment to unlock virtual test environment
+                        </div>
+                        <div class="payment-id">Hall Access ID: #HALL-789012</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <script>
+        // Category toggle functionality
+        const categoryToggle = document.querySelectorAll('.toggle-option');
+        const toggleIndicator = document.querySelector('.toggle-indicator');
+        const pricingToggleSection = document.getElementById('pricingToggleSection');
+        const testPlansSection = document.getElementById('test-plans-section');
+        const testHallsSection = document.getElementById('test-halls-section');
+        
+        categoryToggle.forEach(option => {
+            option.addEventListener('click', () => {
+                categoryToggle.forEach(opt => opt.classList.remove('active'));
+                option.classList.add('active');
+                
+                const category = option.getAttribute('data-category');
+                
+                if (category === 'test-halls') {
+                    toggleIndicator.classList.add('test-halls');
+                    pricingToggleSection.style.display = 'none';
+                    testPlansSection.classList.add('hidden');
+                    testHallsSection.classList.remove('hidden');
+                } else {
+                    toggleIndicator.classList.remove('test-halls');
+                    pricingToggleSection.style.display = 'flex';
+                    testPlansSection.classList.remove('hidden');
+                    testHallsSection.classList.add('hidden');
+                }
+            });
+        });
+        
+        // Pricing toggle functionality
+        const pricingToggle = document.getElementById('pricingToggle');
+        let isYearly = false;
+        
+        const monthlyPrices = { 
+            history: 1299, geography: 1199, polity: 1399, 
+            economics: 1499, science: 1099, environment: 999 
+        };
+        const yearlyPrices = { 
+            history: 909, geography: 839, polity: 979, 
+            economics: 1049, science: 769, environment: 699 
+        };
+        
+        if (pricingToggle) {
+            pricingToggle.addEventListener('click', () => {
+                isYearly = !isYearly;
+                pricingToggle.classList.toggle('active');
+                updateTestPlanPrices();
+            });
+        }
+        
+        function updateTestPlanPrices() {
+            const prices = isYearly ? yearlyPrices : monthlyPrices;
+            
+            Object.keys(prices).forEach(subject => {
+                const priceElement = document.getElementById(`${subject}-price`);
+                if (priceElement) {
+                    priceElement.textContent = prices[subject];
+                }
+            });
+        }
+        
+        // Test Plan Modal functionality
+        function openTestPlanModal(planName, description, price) {
+            document.getElementById('planModalTitle').textContent = planName;
+            document.getElementById('planModalSubtitle').textContent = description;
+            document.getElementById('planSummaryTitle').textContent = planName + ' Plan';
+            document.getElementById('planSummaryPrice').textContent = `₹${price}`;
+            document.getElementById('testPlanModal').classList.add('active');
+            
+            // Hide QR section initially
+            document.getElementById('planQRSection').style.display = 'none';
+            
+            // Generate random payment ID
+            const paymentId = 'PLAN' + Math.floor(Math.random() * 1000000);
+            document.querySelector('#testPlanModal .payment-id').textContent = `Payment ID: #${paymentId}`;
+        }
+        
+        // Test Hall Modal functionality
+        function openTestHallModal(hallName, description, price) {
+            document.getElementById('hallModalTitle').textContent = hallName;
+            document.getElementById('hallModalSubtitle').textContent = description;
+            document.getElementById('hallSummaryTitle').textContent = hallName + ' Access';
+            document.getElementById('hallSummaryPrice').textContent = `₹${price}`;
+            document.getElementById('testHallModal').classList.add('active');
+            
+            // Hide QR section initially
+            document.getElementById('hallQRSection').style.display = 'none';
+            
+            // Generate random hall access ID
+            const hallId = 'HALL' + Math.floor(Math.random() * 1000000);
+            document.querySelector('#testHallModal .payment-id').textContent = `Hall Access ID: #${hallId}`;
+        }
+        
+        // Show QR payment sections
+        function showPlanPayment() {
+            document.getElementById('planQRSection').style.display = 'block';
+        }
+        
+        function showHallPayment() {
+            document.getElementById('hallQRSection').style.display = 'block';
+        }
+        
+        // Generic modal close function
+        function closeModal(modalId) {
+            document.getElementById(modalId).classList.remove('active');
+        }
+        
+        // Original payment modal functionality (for backward compatibility)
+        function openPaymentModal(planName, price) {
+            document.getElementById('selectedPlan').textContent = planName;
+            document.getElementById('selectedPrice').textContent = `₹${price}`;
+            document.getElementById('paymentModal').classList.add('active');
+            
+            // Generate random payment ID
+            const paymentId = 'PAY' + Math.floor(Math.random() * 1000000);
+            document.querySelector('#paymentModal .payment-id').textContent = `Payment ID: #${paymentId}`;
+        }
+        
+        function closePaymentModal() {
+            document.getElementById('paymentModal').classList.remove('active');
+        }
+        
+        function switchPaymentMethod(method) {
+            document.querySelectorAll('.payment-tab').forEach(tab => tab.classList.remove('active'));
+            event.target.classList.add('active');
+            
+            if (method === 'qr') {
+                document.getElementById('qrPayment').style.display = 'block';
+                document.getElementById('cardPayment').style.display = 'none';
+            } else {
+                document.getElementById('qrPayment').style.display = 'none';
+                document.getElementById('cardPayment').style.display = 'block';
+            }
+        }
+        
+        // FAQ functionality
+        function toggleFaq(index) {
+            const faqItems = document.querySelectorAll('.faq-item');
+            const currentItem = faqItems[index];
+            const answer = currentItem.querySelector('.faq-answer');
+            const isActive = currentItem.classList.contains('active');
+            
+            // Close all other FAQs
+            faqItems.forEach(item => {
+                item.classList.remove('active');
+                item.querySelector('.faq-answer').classList.remove('active');
+            });
+            
+            // Toggle current FAQ
+            if (!isActive) {
+                currentItem.classList.add('active');
+                answer.classList.add('active');
+            }
+        }
+        
+        // Close modal on escape key
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape') {
+                closePaymentModal();
+            }
+        });
+        
+        // Handle hash navigation on page load
+        window.addEventListener('DOMContentLoaded', function() {
+            const hash = window.location.hash;
+            if (hash === '#test-plans-section') {
+                // Activate test plans section
+                categoryToggle.forEach(opt => opt.classList.remove('active'));
+                document.querySelector('[data-category="test-plans"]').classList.add('active');
+                toggleIndicator.classList.remove('test-halls');
+                pricingToggleSection.style.display = 'flex';
+                testPlansSection.classList.remove('hidden');
+                testHallsSection.classList.add('hidden');
+            } else if (hash === '#test-halls-section') {
+                // Activate test halls section
+                categoryToggle.forEach(opt => opt.classList.remove('active'));
+                document.querySelector('[data-category="test-halls"]').classList.add('active');
+                toggleIndicator.classList.add('test-halls');
+                pricingToggleSection.style.display = 'none';
+                testPlansSection.classList.add('hidden');
+                testHallsSection.classList.remove('hidden');
+            }
+        });
+        
+        // Simulate QR code generation
+        setTimeout(() => {
+            const qrCode = document.querySelector('.qr-code');
+            qrCode.innerHTML = `
+                <svg width="180" height="180" style="border: 2px solid #3b82f6; border-radius: 8px; background: white;">
+                    <rect width="180" height="180" fill="white"/>
+                    <text x="90" y="95" text-anchor="middle" fill="#3b82f6" font-size="12" font-weight="600">QR Code</text>
+                    <text x="90" y="110" text-anchor="middle" fill="#6b7280" font-size="10">Scan to Pay</text>
+                </svg>
+            `;
+        }, 1000);
+    </script>
+</body>
+</html>

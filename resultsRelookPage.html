@@ -1,0 +1,728 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>IASMentorEdge - Test Results</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Inter', sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+        }
+        
+        .header {
+            background: rgba(255,255,255,0.1);
+            padding: 20px 40px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid rgba(255,255,255,0.2);
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            color: white;
+        }
+        
+        .logo-icon {
+            width: 40px;
+            height: 40px;
+            background: white;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #764ba2;
+            font-weight: 700;
+        }
+        
+        .logo-text {
+            font-size: 24px;
+            font-weight: 700;
+        }
+        
+        .header-actions {
+            display: flex;
+            gap: 16px;
+        }
+        
+        .action-button {
+            padding: 10px 20px;
+            border-radius: 8px;
+            border: 2px solid white;
+            background: transparent;
+            color: white;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .action-button:hover {
+            background: white;
+            color: #764ba2;
+        }
+        
+        .main-container {
+            max-width: 1400px;
+            margin: 40px auto;
+            padding: 0 20px;
+        }
+        
+        /* Results Summary Card */
+        .results-summary {
+            background: white;
+            border-radius: 24px;
+            padding: 40px;
+            margin-bottom: 40px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.2);
+        }
+        
+        .results-header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+        
+        .test-title {
+            font-size: 32px;
+            font-weight: 700;
+            color: #1a1a1a;
+            margin-bottom: 8px;
+        }
+        
+        .test-date {
+            font-size: 16px;
+            color: #6b7280;
+        }
+        
+        .score-display {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+        
+        .score-circle {
+            width: 200px;
+            height: 200px;
+            margin: 0 auto 24px;
+            position: relative;
+        }
+        
+        .score-svg {
+            transform: rotate(-90deg);
+        }
+        
+        .score-bg {
+            fill: none;
+            stroke: #e5e7eb;
+            stroke-width: 20;
+        }
+        
+        .score-progress {
+            fill: none;
+            stroke: url(#gradient);
+            stroke-width: 20;
+            stroke-linecap: round;
+            stroke-dasharray: 565;
+            stroke-dashoffset: 141;
+            animation: fillProgress 2s ease-out forwards;
+        }
+        
+        @keyframes fillProgress {
+            to {
+                stroke-dashoffset: 141;
+            }
+        }
+        
+        .score-text {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            text-align: center;
+        }
+        
+        .score-value {
+            font-size: 48px;
+            font-weight: 700;
+            color: #1a1a1a;
+        }
+        
+        .score-label {
+            font-size: 14px;
+            color: #6b7280;
+        }
+        
+        .performance-message {
+            font-size: 20px;
+            font-weight: 600;
+            color: #22c55e;
+            margin-bottom: 8px;
+        }
+        
+        .percentile {
+            font-size: 16px;
+            color: #6b7280;
+        }
+        
+        /* Stats Grid */
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 24px;
+            margin-bottom: 40px;
+        }
+        
+        .stat-card {
+            background: #f9fafb;
+            padding: 24px;
+            border-radius: 12px;
+            text-align: center;
+        }
+        
+        .stat-icon {
+            width: 48px;
+            height: 48px;
+            margin: 0 auto 12px;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+        }
+        
+        .icon-correct { background: #dcfce7; }
+        .icon-incorrect { background: #fee2e2; }
+        .icon-skipped { background: #fef3c7; }
+        .icon-time { background: #dbeafe; }
+        .icon-accuracy { background: #f3e8ff; }
+        .icon-rank { background: #ccfbf1; }
+        
+        .stat-value {
+            font-size: 32px;
+            font-weight: 700;
+            color: #1a1a1a;
+            margin-bottom: 4px;
+        }
+        
+        .stat-label {
+            font-size: 14px;
+            color: #6b7280;
+        }
+        
+        /* Analysis Tabs */
+        .analysis-section {
+            background: white;
+            border-radius: 24px;
+            padding: 32px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.2);
+        }
+        
+        .tabs {
+            display: flex;
+            gap: 8px;
+            margin-bottom: 32px;
+            border-bottom: 2px solid #e5e7eb;
+        }
+        
+        .tab {
+            padding: 12px 24px;
+            background: none;
+            border: none;
+            border-bottom: 3px solid transparent;
+            font-weight: 600;
+            color: #6b7280;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .tab:hover {
+            color: #374151;
+        }
+        
+        .tab.active {
+            color: #3b82f6;
+            border-bottom-color: #3b82f6;
+        }
+        
+        /* Question Review */
+        .question-review {
+            margin-bottom: 32px;
+            padding: 24px;
+            background: #f9fafb;
+            border-radius: 12px;
+            border-left: 4px solid #e5e7eb;
+        }
+        
+        .question-review.correct {
+            border-left-color: #22c55e;
+        }
+        
+        .question-review.incorrect {
+            border-left-color: #ef4444;
+        }
+        
+        .review-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 16px;
+        }
+        
+        .question-num {
+            font-weight: 600;
+            color: #1a1a1a;
+        }
+        
+        .result-badge {
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 600;
+        }
+        
+        .badge-correct {
+            background: #dcfce7;
+            color: #166534;
+        }
+        
+        .badge-incorrect {
+            background: #fee2e2;
+            color: #991b1b;
+        }
+        
+        .question-text {
+            font-size: 15px;
+            line-height: 1.8;
+            color: #374151;
+            margin-bottom: 16px;
+        }
+        
+        .answer-options {
+            margin-bottom: 16px;
+        }
+        
+        .option-row {
+            display: flex;
+            align-items: center;
+            padding: 12px;
+            margin-bottom: 8px;
+            background: white;
+            border-radius: 8px;
+            border: 1px solid #e5e7eb;
+        }
+        
+        .option-row.user-selected {
+            background: #fee2e2;
+            border-color: #ef4444;
+        }
+        
+        .option-row.correct-answer {
+            background: #dcfce7;
+            border-color: #22c55e;
+        }
+        
+        .option-label {
+            font-weight: 600;
+            margin-right: 12px;
+            color: #6b7280;
+        }
+        
+        .option-text {
+            flex: 1;
+            color: #374151;
+        }
+        
+        .answer-indicator {
+            margin-left: auto;
+            padding: 2px 8px;
+            border-radius: 4px;
+            font-size: 12px;
+            font-weight: 600;
+        }
+        
+        .your-answer {
+            background: #fee2e2;
+            color: #ef4444;
+        }
+        
+        .correct-indicator {
+            background: #dcfce7;
+            color: #22c55e;
+        }
+        
+        .explanation-box {
+            background: #f0f9ff;
+            border: 1px solid #3b82f6;
+            border-radius: 8px;
+            padding: 16px;
+            margin-top: 16px;
+        }
+        
+        .explanation-title {
+            font-weight: 600;
+            color: #1e40af;
+            margin-bottom: 8px;
+        }
+        
+        .explanation-text {
+            font-size: 14px;
+            line-height: 1.6;
+            color: #374151;
+        }
+        
+        /* Topic Performance */
+        .topic-performance {
+            display: grid;
+            gap: 16px;
+        }
+        
+        .topic-item {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            padding: 16px;
+            background: #f9fafb;
+            border-radius: 12px;
+        }
+        
+        .topic-name {
+            flex: 1;
+            font-weight: 600;
+            color: #1a1a1a;
+        }
+        
+        .topic-score {
+            font-weight: 600;
+            color: #6b7280;
+            margin-right: 16px;
+        }
+        
+        .topic-bar {
+            width: 200px;
+            height: 8px;
+            background: #e5e7eb;
+            border-radius: 4px;
+            overflow: hidden;
+        }
+        
+        .topic-progress {
+            height: 100%;
+            background: linear-gradient(90deg, #3b82f6 0%, #8b5cf6 100%);
+            border-radius: 4px;
+        }
+        
+        /* Comparative Analysis */
+        .comparison-chart {
+            padding: 24px;
+            background: #f9fafb;
+            border-radius: 12px;
+            margin-bottom: 24px;
+        }
+        
+        .chart-title {
+            font-weight: 600;
+            color: #1a1a1a;
+            margin-bottom: 20px;
+        }
+        
+        .comparison-bars {
+            display: flex;
+            gap: 40px;
+            align-items: flex-end;
+            height: 200px;
+            margin-bottom: 12px;
+        }
+        
+        .bar-group {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: flex-end;
+        }
+        
+        .bar {
+            width: 60px;
+            background: linear-gradient(180deg, #3b82f6 0%, #8b5cf6 100%);
+            border-radius: 8px 8px 0 0;
+            display: flex;
+            align-items: flex-start;
+            justify-content: center;
+            padding-top: 12px;
+            color: white;
+            font-weight: 600;
+        }
+        
+        .bar-label {
+            margin-top: 8px;
+            font-size: 14px;
+            color: #6b7280;
+        }
+        
+        /* Report Card Download */
+        .download-section {
+            text-align: center;
+            padding: 32px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border-radius: 16px;
+            margin-top: 32px;
+        }
+        
+        .download-title {
+            font-size: 24px;
+            font-weight: 600;
+            color: white;
+            margin-bottom: 12px;
+        }
+        
+        .download-text {
+            color: rgba(255,255,255,0.9);
+            margin-bottom: 24px;
+        }
+        
+        .download-btn {
+            background: white;
+            color: #764ba2;
+            padding: 14px 32px;
+            border-radius: 8px;
+            border: none;
+            font-weight: 600;
+            font-size: 16px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .download-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <div class="logo" onclick="window.location.href='main.html'" style="cursor: pointer;">
+            <div class="logo-icon">IM</div>
+            <div class="logo-text">IASMentorEdge</div>
+        </div>
+        <div class="header-actions">
+            <button class="action-button" onclick="window.location.href='main.html'">Back to Tests</button>
+            <button class="action-button">Share Results</button>
+        </div>
+    </header>
+    
+    <div class="main-container">
+        <!-- Results Summary -->
+        <div class="results-summary">
+            <div class="results-header">
+                <h1 class="test-title">Prelims Mock Test - History</h1>
+                <p class="test-date">Completed on July 29, 2025 at 3:30 PM</p>
+            </div>
+            
+            <div class="score-display">
+                <div class="score-circle">
+                    <svg class="score-svg" width="200" height="200">
+                        <defs>
+                            <linearGradient id="gradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                                <stop offset="0%" style="stop-color:#3b82f6;stop-opacity:1" />
+                                <stop offset="100%" style="stop-color:#8b5cf6;stop-opacity:1" />
+                            </linearGradient>
+                        </defs>
+                        <circle class="score-bg" cx="100" cy="100" r="90"></circle>
+                        <circle class="score-progress" cx="100" cy="100" r="90"></circle>
+                    </svg>
+                    <div class="score-text">
+                        <div class="score-value">85%</div>
+                        <div class="score-label">Total Score</div>
+                    </div>
+                </div>
+                <div class="performance-message">Excellent Performance! 🎉</div>
+                <div class="percentile">You scored better than 92% of test takers</div>
+            </div>
+            
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <div class="stat-icon icon-correct">✓</div>
+                    <div class="stat-value">17</div>
+                    <div class="stat-label">Correct Answers</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon icon-incorrect">✗</div>
+                    <div class="stat-value">3</div>
+                    <div class="stat-label">Incorrect Answers</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon icon-skipped">⊘</div>
+                    <div class="stat-value">0</div>
+                    <div class="stat-label">Skipped</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon icon-time">⏱</div>
+                    <div class="stat-value">45m</div>
+                    <div class="stat-label">Time Taken</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon icon-accuracy">🎯</div>
+                    <div class="stat-value">85%</div>
+                    <div class="stat-label">Accuracy</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon icon-rank">🏆</div>
+                    <div class="stat-value">#23</div>
+                    <div class="stat-label">Rank</div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Analysis Section -->
+        <div class="analysis-section">
+            <div class="tabs">
+                <button class="tab active">Question Review</button>
+                <button class="tab">Topic Performance</button>
+                <button class="tab">Comparative Analysis</button>
+                <button class="tab">Time Analysis</button>
+            </div>
+            
+            <!-- Question Review Tab -->
+            <div class="tab-content">
+                <div class="question-review correct">
+                    <div class="review-header">
+                        <span class="question-num">Question 1</span>
+                        <span class="result-badge badge-correct">Correct</span>
+                    </div>
+                    <div class="question-text">
+                        With reference to the Indus Valley Civilization, consider the following statements:<br>
+                        1. The Harappan script has been successfully deciphered and is found to be proto-Dravidian.<br>
+                        2. The Great Bath at Mohenjo-daro is the earliest public water tank in the Indian subcontinent.<br>
+                        3. The Harappan civilization had trade relations with Mesopotamia.<br><br>
+                        Which of the statements given above is/are correct?
+                    </div>
+                    <div class="answer-options">
+                        <div class="option-row">
+                            <span class="option-label">A)</span>
+                            <span class="option-text">1 only</span>
+                        </div>
+                        <div class="option-row">
+                            <span class="option-label">B)</span>
+                            <span class="option-text">2 only</span>
+                        </div>
+                        <div class="option-row correct-answer">
+                            <span class="option-label">C)</span>
+                            <span class="option-text">2 and 3 only</span>
+                            <span class="answer-indicator correct-indicator">✓ Correct</span>
+                        </div>
+                        <div class="option-row">
+                            <span class="option-label">D)</span>
+                            <span class="option-text">1, 2 and 3</span>
+                        </div>
+                    </div>
+                    <div class="explanation-box">
+                        <div class="explanation-title">Explanation:</div>
+                        <div class="explanation-text">
+                            Statement 1 is incorrect - The Harappan script remains undeciphered despite numerous attempts.
+                            Statement 2 is correct - The Great Bath is indeed the earliest known public water tank.
+                            Statement 3 is correct - Archaeological evidence confirms trade relations with Mesopotamia.
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="question-review incorrect">
+                    <div class="review-header">
+                        <span class="question-num">Question 2</span>
+                        <span class="result-badge badge-incorrect">Incorrect</span>
+                    </div>
+                    <div class="question-text">
+                        The term 'Sangam' in ancient Tamil history refers to:
+                    </div>
+                    <div class="answer-options">
+                        <div class="option-row user-selected">
+                            <span class="option-label">A)</span>
+                            <span class="option-text">A type of ancient Tamil script</span>
+                            <span class="answer-indicator your-answer">Your Answer</span>
+                        </div>
+                        <div class="option-row correct-answer">
+                            <span class="option-label">B)</span>
+                            <span class="option-text">Assembly of Tamil scholars and poets</span>
+                            <span class="answer-indicator correct-indicator">✓ Correct</span>
+                        </div>
+                        <div class="option-row">
+                            <span class="option-label">C)</span>
+                            <span class="option-text">A Tamil kingdom</span>
+                        </div>
+                        <div class="option-row">
+                            <span class="option-label">D)</span>
+                            <span class="option-text">A trade guild</span>
+                        </div>
+                    </div>
+                    <div class="explanation-box">
+                        <div class="explanation-title">Explanation:</div>
+                        <div class="explanation-text">
+                            'Sangam' refers to the assembly or academy of Tamil scholars and poets that flourished in ancient Tamil Nadu. Three Sangams are mentioned in Tamil tradition, held at different periods in Madurai.
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Topic Performance (Hidden by default, shown when tab clicked) -->
+            <div class="tab-content" style="display: none;">
+                <div class="topic-performance">
+                    <div class="topic-item">
+                        <span class="topic-name">Ancient India</span>
+                        <span class="topic-score">90%</span>
+                        <div class="topic-bar">
+                            <div class="topic-progress" style="width: 90%;"></div>
+                        </div>
+                    </div>
+                    <div class="topic-item">
+                        <span class="topic-name">Medieval India</span>
+                        <span class="topic-score">85%</span>
+                        <div class="topic-bar">
+                            <div class="topic-progress" style="width: 85%;"></div>
+                        </div>
+                    </div>
+                    <div class="topic-item">
+                        <span class="topic-name">Modern India</span>
+                        <span class="topic-score">80%</span>
+                        <div class="topic-bar">
+                            <div class="topic-progress" style="width: 80%;"></div>
+                        </div>
+                    </div>
+                    <div class="topic-item">
+                        <span class="topic-name">Art & Culture</span>
+                        <span class="topic-score">75%</span>
+                        <div class="topic-bar">
+                            <div class="topic-progress" style="width: 75%;"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Download Report Card -->
+            <div class="download-section">
+                <h3 class="download-title">Download Detailed Report Card</h3>
+                <p class="download-text">Get comprehensive analysis with improvement suggestions</p>
+                <button class="download-btn">📥 Download PDF Report</button>
+            </div>
+        </div>
+    </div>
+    
+    <script>
+        // Tab switching functionality
+        document.querySelectorAll('.tab').forEach(tab => {
+            tab.addEventListener('click', function() {
+                document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+                this.classList.add('active');
+            });
+        });
+    </script>
+</body>
+</html>

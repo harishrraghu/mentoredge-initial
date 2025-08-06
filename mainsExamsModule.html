@@ -1,0 +1,690 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>IASMentorEdge - Mains Exam</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Inter', sans-serif;
+            background: #f5f6fa;
+            min-height: 100vh;
+        }
+        
+        .exam-header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            padding: 20px 32px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        
+        .exam-title {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            color: white;
+        }
+        
+        .back-btn {
+            width: 36px;
+            height: 36px;
+            border-radius: 8px;
+            background: rgba(255,255,255,0.2);
+            border: none;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            transition: background 0.3s ease;
+        }
+        
+        .back-btn:hover {
+            background: rgba(255,255,255,0.3);
+        }
+        
+        .exam-name {
+            font-size: 22px;
+            font-weight: 600;
+        }
+        
+        .exam-timer {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            background: rgba(255,255,255,0.2);
+            padding: 12px 24px;
+            border-radius: 8px;
+            font-weight: 600;
+            color: white;
+            font-size: 18px;
+        }
+        
+        .exam-actions {
+            display: flex;
+            gap: 12px;
+        }
+        
+        .action-btn {
+            padding: 12px 24px;
+            border-radius: 8px;
+            border: none;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .save-btn {
+            background: rgba(255,255,255,0.2);
+            color: white;
+            border: 2px solid white;
+        }
+        
+        .save-btn:hover {
+            background: rgba(255,255,255,0.3);
+        }
+        
+        .submit-btn {
+            background: #22c55e;
+            color: white;
+        }
+        
+        .submit-btn:hover {
+            background: #16a34a;
+        }
+        
+        .exam-container {
+            display: grid;
+            grid-template-columns: 1fr 380px;
+            gap: 24px;
+            max-width: 1600px;
+            margin: 24px auto;
+            padding: 0 24px;
+        }
+        
+        /* Main Content Area */
+        .main-content {
+            display: flex;
+            flex-direction: column;
+            gap: 24px;
+        }
+        
+        .question-paper {
+            background: white;
+            border-radius: 16px;
+            padding: 40px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+        }
+        
+        .paper-header {
+            text-align: center;
+            padding-bottom: 32px;
+            border-bottom: 2px solid #e5e7eb;
+            margin-bottom: 32px;
+        }
+        
+        .paper-title {
+            font-size: 28px;
+            font-weight: 700;
+            color: #1a1a1a;
+            margin-bottom: 12px;
+        }
+        
+        .paper-subtitle {
+            font-size: 16px;
+            color: #6b7280;
+            margin-bottom: 20px;
+        }
+        
+        .paper-info {
+            display: flex;
+            justify-content: center;
+            gap: 40px;
+            margin-top: 20px;
+        }
+        
+        .info-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        
+        .info-label {
+            font-size: 14px;
+            color: #6b7280;
+            margin-bottom: 4px;
+        }
+        
+        .info-value {
+            font-size: 18px;
+            font-weight: 600;
+            color: #1a1a1a;
+        }
+        
+        .section-divider {
+            margin: 40px 0;
+            padding: 16px;
+            background: linear-gradient(90deg, #f3f4f6 0%, transparent 50%, #f3f4f6 100%);
+            text-align: center;
+            font-weight: 600;
+            color: #6b7280;
+            border-radius: 8px;
+        }
+        
+        .question-block {
+            margin-bottom: 40px;
+        }
+        
+        .question-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+        
+        .question-number {
+            font-size: 18px;
+            font-weight: 600;
+            color: #1a1a1a;
+            background: #f3f4f6;
+            padding: 8px 16px;
+            border-radius: 8px;
+        }
+        
+        .question-marks {
+            background: #dbeafe;
+            color: #1e40af;
+            padding: 6px 12px;
+            border-radius: 6px;
+            font-size: 14px;
+            font-weight: 600;
+        }
+        
+        .question-text {
+            font-size: 16px;
+            line-height: 1.8;
+            color: #374151;
+            margin-bottom: 24px;
+        }
+        
+        .answer-area {
+            background: #f9fafb;
+            border: 2px solid #e5e7eb;
+            border-radius: 12px;
+            padding: 20px;
+            min-height: 300px;
+        }
+        
+        .answer-textarea {
+            width: 100%;
+            min-height: 250px;
+            border: none;
+            background: transparent;
+            font-size: 15px;
+            line-height: 1.8;
+            resize: vertical;
+            outline: none;
+            font-family: 'Inter', sans-serif;
+        }
+        
+        .word-count {
+            text-align: right;
+            font-size: 14px;
+            color: #6b7280;
+            margin-top: 12px;
+            padding-top: 12px;
+            border-top: 1px solid #e5e7eb;
+        }
+        
+        /* Right Sidebar */
+        .sidebar {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            position: sticky;
+            top: 100px;
+            height: fit-content;
+        }
+        
+        .omr-upload {
+            background: white;
+            border-radius: 12px;
+            padding: 24px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+        }
+        
+        .section-title {
+            font-size: 18px;
+            font-weight: 600;
+            margin-bottom: 20px;
+            color: #1a1a1a;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .omr-upload-area {
+            border: 3px dashed #3b82f6;
+            border-radius: 12px;
+            padding: 32px 20px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            background: #f0f9ff;
+        }
+        
+        .omr-upload-area:hover {
+            background: #dbeafe;
+            border-color: #2563eb;
+        }
+        
+        .upload-icon {
+            font-size: 48px;
+            margin-bottom: 12px;
+        }
+        
+        .upload-title {
+            font-size: 16px;
+            font-weight: 600;
+            color: #1a1a1a;
+            margin-bottom: 8px;
+        }
+        
+        .upload-text {
+            font-size: 14px;
+            color: #6b7280;
+            margin-bottom: 16px;
+        }
+        
+        .upload-btn {
+            background: #3b82f6;
+            color: white;
+            padding: 10px 24px;
+            border-radius: 8px;
+            border: none;
+            font-weight: 600;
+            cursor: pointer;
+        }
+        
+        .upload-btn:hover {
+            background: #2563eb;
+        }
+        
+        .uploaded-omr {
+            margin-top: 20px;
+        }
+        
+        .omr-item {
+            display: flex;
+            align-items: center;
+            padding: 12px;
+            background: #f0f9ff;
+            border: 1px solid #3b82f6;
+            border-radius: 8px;
+            margin-bottom: 12px;
+        }
+        
+        .omr-icon {
+            width: 40px;
+            height: 40px;
+            background: #3b82f6;
+            color: white;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 12px;
+        }
+        
+        .omr-details {
+            flex: 1;
+        }
+        
+        .omr-name {
+            font-weight: 600;
+            color: #1a1a1a;
+            margin-bottom: 2px;
+        }
+        
+        .omr-size {
+            font-size: 12px;
+            color: #6b7280;
+        }
+        
+        .omr-remove {
+            color: #ef4444;
+            cursor: pointer;
+            font-size: 20px;
+            padding: 0 8px;
+        }
+        
+        .question-nav-panel {
+            background: white;
+            border-radius: 12px;
+            padding: 24px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+        }
+        
+        .nav-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 8px;
+            margin-bottom: 20px;
+        }
+        
+        .nav-question {
+            aspect-ratio: 1;
+            border-radius: 8px;
+            border: 2px solid #e5e7eb;
+            background: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 14px;
+        }
+        
+        .nav-question:hover {
+            border-color: #3b82f6;
+            background: #f0f9ff;
+        }
+        
+        .nav-question.active {
+            background: #3b82f6;
+            color: white;
+            border-color: #3b82f6;
+        }
+        
+        .nav-question.attempted {
+            background: #dcfce7;
+            border-color: #22c55e;
+            color: #166534;
+        }
+        
+        .instructions-panel {
+            background: #fef3c7;
+            border-radius: 12px;
+            padding: 20px;
+            margin-top: 20px;
+        }
+        
+        .instructions-title {
+            font-weight: 600;
+            color: #92400e;
+            margin-bottom: 12px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .instructions-list {
+            font-size: 14px;
+            color: #92400e;
+            line-height: 1.8;
+        }
+        
+        .instructions-list li {
+            margin-bottom: 8px;
+            margin-left: 20px;
+        }
+        
+        .tools-panel {
+            background: white;
+            border-radius: 12px;
+            padding: 20px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+        }
+        
+        .tool-btn {
+            width: 100%;
+            padding: 12px;
+            border-radius: 8px;
+            border: 1px solid #e5e7eb;
+            background: white;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            cursor: pointer;
+            margin-bottom: 12px;
+            transition: all 0.3s ease;
+        }
+        
+        .tool-btn:hover {
+            background: #f9fafb;
+            border-color: #9ca3af;
+        }
+        
+        .tool-icon {
+            width: 36px;
+            height: 36px;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 20px;
+        }
+        
+        .formula-icon { background: #dbeafe; }
+        .reference-icon { background: #dcfce7; }
+        .calculator-icon { background: #fef3c7; }
+    </style>
+</head>
+<body>
+    <header class="exam-header">
+        <div class="exam-title">
+            <button class="back-btn" onclick="window.location.href='main.html'">←</button>
+            <span class="exam-name">Mains Excellence - General Studies Paper I</span>
+        </div>
+        <div class="exam-timer">
+            <span>⏱️</span>
+            <span>02:45:00</span>
+        </div>
+        <div class="exam-actions">
+            <button class="action-btn save-btn">Save Progress</button>
+            <button class="action-btn submit-btn" onclick="submitMainsPaper()">Submit Paper</button>
+        </div>
+    </header>
+    
+    <div class="exam-container">
+        <!-- Main Content -->
+        <div class="main-content">
+            <div class="question-paper">
+                <div class="paper-header">
+                    <h1 class="paper-title">UPSC Civil Services (Main) Examination</h1>
+                    <p class="paper-subtitle">General Studies - Paper I</p>
+                    <div class="paper-info">
+                        <div class="info-item">
+                            <span class="info-label">Total Questions</span>
+                            <span class="info-value">20</span>
+                        </div>
+                        <div class="info-item">
+                            <span class="info-label">Total Marks</span>
+                            <span class="info-value">250</span>
+                        </div>
+                        <div class="info-item">
+                            <span class="info-label">Time Allowed</span>
+                            <span class="info-value">3 Hours</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="section-divider">SECTION A - (Answer any 10 questions)</div>
+                
+                <div class="question-block">
+                    <div class="question-header">
+                        <span class="question-number">Question 1</span>
+                        <span class="question-marks">10 Marks | 150 Words</span>
+                    </div>
+                    <div class="question-text">
+                        "The Bhakti movement received a remarkable re-orientation with the advent of Sri Chaitanya Mahaprabhu." Discuss.
+                    </div>
+                    <div class="answer-area">
+                        <textarea class="answer-textarea" placeholder="Write your answer here..."></textarea>
+                        <div class="word-count">Words: 0 / 150</div>
+                    </div>
+                </div>
+                
+                <div class="question-block">
+                    <div class="question-header">
+                        <span class="question-number">Question 2</span>
+                        <span class="question-marks">10 Marks | 150 Words</span>
+                    </div>
+                    <div class="question-text">
+                        Examine the linkages between the nineteenth century's "Indian Renaissance" and the emergence of national identity.
+                    </div>
+                    <div class="answer-area">
+                        <textarea class="answer-textarea" placeholder="Write your answer here..."></textarea>
+                        <div class="word-count">Words: 0 / 150</div>
+                    </div>
+                </div>
+                
+                <div class="section-divider">SECTION B - (Answer any 5 questions)</div>
+                
+                <div class="question-block">
+                    <div class="question-header">
+                        <span class="question-number">Question 11</span>
+                        <span class="question-marks">15 Marks | 250 Words</span>
+                    </div>
+                    <div class="question-text">
+                        How do ocean currents and water masses differ in their impacts on marine life and the coastal environment? Give suitable examples.
+                    </div>
+                    <div class="answer-area">
+                        <textarea class="answer-textarea" placeholder="Write your answer here..."></textarea>
+                        <div class="word-count">Words: 0 / 250</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Right Sidebar -->
+        <div class="sidebar">
+            <div class="omr-upload">
+                <h3 class="section-title">
+                    <span>📋</span>
+                    OMR Sheet Upload
+                </h3>
+                <div class="omr-upload-area">
+                    <div class="upload-icon">📄</div>
+                    <div class="upload-title">Upload OMR Sheet</div>
+                    <div class="upload-text">Scan and upload your filled OMR sheet</div>
+                    <div style="font-size: 12px; color: #6b7280;">PDF, JPG, PNG (Max 5MB)</div>
+                    <button class="upload-btn">Select OMR Sheet</button>
+                </div>
+                
+                <div class="uploaded-omr">
+                    <div class="omr-item">
+                        <div class="omr-icon">📋</div>
+                        <div class="omr-details">
+                            <div class="omr-name">OMR_Sheet_Q1-10.pdf</div>
+                            <div class="omr-size">2.3 MB</div>
+                        </div>
+                        <span class="omr-remove">×</span>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="question-nav-panel">
+                <h3 class="section-title">Question Navigation</h3>
+                <div class="nav-grid">
+                    <div class="nav-question active">Q1</div>
+                    <div class="nav-question attempted">Q2</div>
+                    <div class="nav-question">Q3</div>
+                    <div class="nav-question">Q4</div>
+                    <div class="nav-question">Q5</div>
+                    <div class="nav-question">Q6</div>
+                    <div class="nav-question">Q7</div>
+                    <div class="nav-question">Q8</div>
+                    <div class="nav-question">Q9</div>
+                    <div class="nav-question">Q10</div>
+                    <div class="nav-question">Q11</div>
+                    <div class="nav-question">Q12</div>
+                </div>
+            </div>
+            
+            <div class="tools-panel">
+                <h3 class="section-title">Quick Tools</h3>
+                <button class="tool-btn">
+                    <div class="tool-icon formula-icon">📐</div>
+                    <div>
+                        <div style="font-weight: 600;">Formula Sheet</div>
+                        <div style="font-size: 12px; color: #6b7280;">Important formulas</div>
+                    </div>
+                </button>
+                <button class="tool-btn">
+                    <div class="tool-icon reference-icon">📚</div>
+                    <div>
+                        <div style="font-weight: 600;">References</div>
+                        <div style="font-size: 12px; color: #6b7280;">Key citations</div>
+                    </div>
+                </button>
+                <button class="tool-btn">
+                    <div class="tool-icon calculator-icon">🧮</div>
+                    <div>
+                        <div style="font-weight: 600;">Calculator</div>
+                        <div style="font-size: 12px; color: #6b7280;">Basic calculations</div>
+                    </div>
+                </button>
+            </div>
+            
+            <div class="instructions-panel">
+                <h4 class="instructions-title">
+                    <span>⚠️</span>
+                    Important Instructions
+                </h4>
+                <ul class="instructions-list">
+                    <li>Write answers within word limit</li>
+                    <li>Upload OMR sheet for MCQs</li>
+                    <li>Save your progress regularly</li>
+                    <li>All questions carry equal marks</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    
+    <script>
+        // Word count functionality
+        document.querySelectorAll('.answer-textarea').forEach(textarea => {
+            textarea.addEventListener('input', function() {
+                const wordCount = this.value.trim().split(/\s+/).filter(word => word.length > 0).length;
+                const maxWords = parseInt(this.nextElementSibling.textContent.split('/')[1]);
+                this.nextElementSibling.textContent = `Words: ${wordCount} / ${maxWords}`;
+                
+                if (wordCount > maxWords) {
+                    this.nextElementSibling.style.color = '#ef4444';
+                } else {
+                    this.nextElementSibling.style.color = '#6b7280';
+                }
+            });
+        });
+        
+        // Question navigation
+        document.querySelectorAll('.nav-question').forEach(nav => {
+            nav.addEventListener('click', function() {
+                document.querySelectorAll('.nav-question').forEach(n => n.classList.remove('active'));
+                this.classList.add('active');
+            });
+        });
+        
+        function submitMainsPaper() {
+            if (confirm('Are you sure you want to submit your paper? You cannot make changes after submission.')) {
+                window.location.href = 'resultsRelookPage.html';
+            }
+        }
+    </script>
+</body>
+</html>
